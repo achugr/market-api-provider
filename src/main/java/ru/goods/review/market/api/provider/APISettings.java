@@ -2,6 +2,8 @@ package ru.goods.review.market.api.provider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -16,9 +18,11 @@ public abstract class APISettings {
     public static String API_KEY;
     public static final String API_VERSION = "v1";
     public static final String MAIN_API_URL = "https://api.content.market.yandex.ru/" + API_VERSION;
-    public static final String GEO_ID_PARAM = "geo_id=0";
+    public static final String GEO_ID_PARAM = "geo_id";
+    public static final String GEO_ID_VALUE = "0";
     public static final String RESPONSE_FORMAT = ".json";
     public static final int TIMEOUT = 100;
+    public static final Map<String, String> DEFAULT_PARAMETERS = new HashMap<String, String>();
 
     static {
         try {
@@ -26,6 +30,7 @@ public abstract class APISettings {
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+        DEFAULT_PARAMETERS.put(GEO_ID_PARAM, GEO_ID_VALUE);
     }
 
     private APISettings(){}

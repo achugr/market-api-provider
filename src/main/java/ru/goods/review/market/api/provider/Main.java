@@ -1,6 +1,8 @@
 package ru.goods.review.market.api.provider;
 
-import ru.goods.review.market.api.url.generator.ModelUrlGenerator;
+import ru.goods.review.market.api.url.generator.ModelRequestBuilder;
+
+import java.util.HashMap;
 
 /**
  * Artemij Chugreev
@@ -12,9 +14,10 @@ import ru.goods.review.market.api.url.generator.ModelUrlGenerator;
 public class Main {
 
     public static void main(String[] args) {
+        ModelRequestBuilder modelRequestBuilder = new ModelRequestBuilder();
         for(int i=0; i<20; i++){
             ContentAPIProvider contentAPIProvider = new ContentAPIProvider();
-            System.out.println(contentAPIProvider.provide(ModelUrlGenerator.urlForModelById(8281343)).toString());
+            System.out.println(contentAPIProvider.provide(modelRequestBuilder.urlForModelById(8281343, new HashMap<String, String>())).toString());
         }
     }
 }
