@@ -1,4 +1,4 @@
-package ru.goods.review.market.api.provider;
+package ru.goodsreview.api.provider;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -7,6 +7,7 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
+import ru.goodsreview.util.StringUtil;
 
 import java.io.IOException;
 
@@ -28,11 +29,11 @@ public class ContentAPIProvider {
         this.getMethod.addRequestHeader("Authorization", APISettings.API_KEY);
     }
 
-    public JSONObject provide(String url){
+    public JSONObject provide(UrlRequest urlRequest){
 //       timeout
         if(System.currentTimeMillis() - lastQueryTime < APISettings.TIMEOUT){
             try {
-                Thread.sleep(APISettings.TIMEOUT);
+                Thread.sleep(urlRequest.getResourceType().getMaxTimeout());
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -41,10 +42,13 @@ public class ContentAPIProvider {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            getMethod.setURI(new URI(url));
+            getMethod.setURI(new URI(urlRequest.getUrl()));
             httpClient.executeMethod(getMethod);
-            System.out.println(new String(getMethod.getResponseBody()));
-            jsonObject = new JSONObject(new String(getMethod.getResponseBody()));
+            String json = StringUtil.inputStreamToString(getMethod.getResponseBodyAsStream());
+            System.out.println("json string: " + json);
+            jsonObject = new JSONObject(json);
+            jsonObject.put("contentType", urlRequest.getResourceType().getName());
+
         } catch (URIException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (HttpException e) {
@@ -56,5 +60,6 @@ public class ContentAPIProvider {
         }
         return jsonObject;
     }
+
 
 }

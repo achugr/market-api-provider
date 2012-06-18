@@ -1,4 +1,4 @@
-package ru.goods.review.market.api.provider;
+package ru.goodsreview.api.provider;
 
 import java.io.File;
 import java.io.FileNotFoundException;

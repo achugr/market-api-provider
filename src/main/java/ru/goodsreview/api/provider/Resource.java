@@ -1,4 +1,4 @@
-package ru.goods.review.market.api.provider;
+package ru.goodsreview.api.provider;
 
 /**
  * Artemij Chugreev
@@ -9,21 +9,13 @@ package ru.goods.review.market.api.provider;
  */
 public enum Resource {
 
-    CATEGORY("category"),
     CHILDREN("children"),
     MODELS("models"),
-    MODEL("model"),
     DETAILS("details"),
     OFFERS("offers"),
     OUTLETS("outlets"),
-    OFFER("offer"),
-    SHOP("shop"),
     OPINION("opinion"),
-    GEOREGION("georegion"),
     SUGGEST("suggest"),
-    VENDOR("vendor"),
-    SEARCH("search"),
-    FILTER("filter"),
     FILTERS("filters");
 
     private final String resourceName;

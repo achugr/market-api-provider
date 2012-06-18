@@ -1,6 +1,8 @@
-package ru.goods.review.market.api.url.generator;
+package ru.goodsreview.api.url.generator;
 
-import ru.goods.review.market.api.provider.APISettings;
+import ru.goodsreview.api.provider.APISettings;
+import ru.goodsreview.api.provider.ResourceType;
+import ru.goodsreview.api.provider.UrlRequest;
 
 import java.util.Map;
 
@@ -13,7 +15,7 @@ import java.util.Map;
  */
 public class RequestBuilder {
 
-    public String build(String[] resources, Map<String, String> parameters) {
+    public UrlRequest build(String[] resources, Map<String, String> parameters, ResourceType resourceType) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(APISettings.MAIN_API_URL);
         for (String resource : resources) {
@@ -28,7 +30,7 @@ public class RequestBuilder {
             stringBuilder.append(entry.getKey()).append("=").append(entry.getValue());
             stringBuilder.append("&");
         }
-        return stringBuilder.toString();
+        return new UrlRequest(stringBuilder.toString(), resourceType);
     }
 
     private static void appendDefaultParameters(StringBuilder stringBuilder) {

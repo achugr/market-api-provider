@@ -1,6 +1,6 @@
-package ru.goods.review.market.api.provider;
+package ru.goodsreview.api.provider;
 
-import ru.goods.review.market.api.url.generator.ModelRequestBuilder;
+import ru.goodsreview.api.url.generator.ModelRequestBuilder;
 
 import java.util.HashMap;
 
@@ -17,7 +17,8 @@ public class Main {
         ModelRequestBuilder modelRequestBuilder = new ModelRequestBuilder();
         for(int i=0; i<20; i++){
             ContentAPIProvider contentAPIProvider = new ContentAPIProvider();
-            System.out.println(contentAPIProvider.provide(modelRequestBuilder.urlForModelById(8281343, new HashMap<String, String>())).toString());
+            System.out.println(modelRequestBuilder.requestForModelById(8281343, new HashMap<String, String>()));
+            System.out.println(contentAPIProvider.provide(modelRequestBuilder.requestForModelById(8281343, new HashMap<String, String>())).toString());
         }
     }
 }
